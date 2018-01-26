@@ -589,7 +589,8 @@ void * monitor_read_only_thread(void *arg) {
 	}
 
 	mmsd->t1=monotonic_time();
-	mmsd->async_exit_status=mysql_query_start(&mmsd->interr,mmsd->mysql,"SHOW GLOBAL VARIABLES LIKE 'read_only'");
+	//mmsd->async_exit_status=mysql_query_start(&mmsd->interr,mmsd->mysql,"SHOW GLOBAL VARIABLES LIKE 'read_only'");
+	mmsd->async_exit_status=mysql_query_start(&mmsd->interr,mmsd->mysql,"SHOW GLOBAL VARIABLES LIKE 'innodb_read_only'");
 	while (mmsd->async_exit_status) {
 		mmsd->async_exit_status=wait_for_mysql(mmsd->mysql, mmsd->async_exit_status);
 		unsigned long long now=monotonic_time();
